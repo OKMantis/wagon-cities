@@ -1,20 +1,20 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
+import selectCity from '../actions/index';
 
-class City extends Component {
-  render() {
+const City = (props) => {
+  return (
+    <li
+      className="list-group-item"
+      onClick={() => props.selectCity(props.city)}
+    >{props.city.name}</li>
+  );
+};
 
-    const url = "https://kitt.lewagon.com/placeholder/cities/paris";
-
-    return (
-    <div className="active-city">
-      <h3>{this.props.city.name}</h3>
-      <p>{this.props.city.address}</p>
-      <img src={url} width="100%" />
-    </div>
-    );
-  };
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ selectCity }, dispatch);
 }
 
-
-export default City;
+export default connect(null, mapDispatchToProps)(City);
